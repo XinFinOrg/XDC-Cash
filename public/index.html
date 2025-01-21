@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>XDC.Cash | Future of Payment with XDC Network</title>
+    <meta name="description" content="Revolutionizing Payments for Fintech Companies, Cross-Border Payment Institutions, and Next-Generation Crypto Payment Solutions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
+
+    <!--====== Bootstrap css ======-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--====== FontAwesome css ======-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--====== Slick-popup css ======-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <!--====== Default css ======-->
+    <style>
+        /* Add basic default styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--====== Nav css ======-->
+    <link rel="stylesheet" href="assets/css/nav.css">
+
+    <style>
+        #map-container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: calc(100vh - 100px);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image-box {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+        }
+        #maps-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        @media (max-width: 768px) {
+            #map-container, .hero-image-box {
+                height: calc(100vh - 80px);
+            }
+        }
+
+        /* Loading Animation Styles */
+        :root {
+            --wallet-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMDA3YmZmIiBkPSJNNDY0IDEyOEg0OGMtMjYuNTEgMC00OCAyMS40OS00OCA0OHYyNTZjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFYxNzZjMC0yNi41MS0yMS40OS00OC00OC00OHptMTYgMzA0YzAgOC44MjItNy4xNzggMTYtMTYgMTZINDhjLTguODIyIDAtMTYtNy4xNzgtMTYtMTZWMTc2YzAtOC44MjIgNy4xNzgtMTYgMTYtMTZoNDE2YzguODIyIDAgMTYgNy4xNzggMTYgMTZ2MjU2eiIvPjxwYXRoIGZpbGw9IiMwMDdiZmYiIGQ9Ik00NjQgMjI0SDQ4Yy04LjgyMiAwLTE2IDcuMTc4LTE2IDE2djEyOGMwIDguODIyIDcuMTc4IDE2IDE2IDE2aDQxNmM4LjgyMiAwIDE2LTcuMTc4IDE2LTE2VjI0MGMwLTguODIyLTcuMTc4LTE2LTE2LTE2em0tMTYgMTI4SDY0VjI1Nmg4NHY2NGgzMnYtNjRoODR2NjRoMzJ2LTY0aDg0djk2eiIvPjwvc3ZnPg==');
+            --bank-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyTDMyIDEyOHY2NGg0NDh2LTY0TDI1NiAzMnptMCAzMmw2NCAyNEgxOTJsNjQtMjR6TTY0IDMyMGg2NFYxOTJoNjR2MTI4aDY0VjE5Mmg2NHYxMjhoNjRWMTkyaDY0djEyOGg0OHYzMkg0OHYtMzJoMTZ6TTQ4IDM4NGg0MTZ2OTZINDh2LTk2eiIvPjwvc3ZnPg==');
+            --xdc-icon: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI1MCA1MEMxNDIuMSA1MCA1MCAxNDIuMSA1MCAyNTBzOTIuMSAyMDAgMjAwIDIwMCAyMDAtOTIuMSAyMDAtMjAwUzM1Ny45IDUwIDI1MCA1MHptMCAzNjBjLTg4LjIgMC0xNjAtNzEuOC0xNjAtMTYwUzE2MS44IDkwIDI1MCA5MHMxNjAgNzEuOCAxNjAgMTYwLTcxLjggMTYwLTE2MCAxNjB6IiBmaWxsPSIjMjg2MEU3Ii8+PHBhdGggZD0iTTI1MCAxNTBjLTU1LjIgMC0xMDAgNDQuOC0xMDAgMTAwczQ0LjggMTAwIDEwMCAxMDAgMTAwLTQ0LjggMTAwLTEwMC00NC44LTEwMC0xMDAtMTAweiIgZmlsbD0iIzI4NjBFNyIvPjx0ZXh0IHg9IjI1MCIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iODBweCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhEQzwvdGV4dD48L3N2Zz4=');
+            --fiat-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyQzExNC42IDMyIDAgMTQ2LjYgMCAyODhzMTE0LjYgMjU2IDI1NiAyNTYgMjU2LTExNC42IDI1Ni0yNTZTMzk3LjQgMzIgMjU2IDMyem0wIDQ0OGMtMTA3LjQgMC0xOTItODQuNi0xOTItMTkyUzE0OC42IDk2IDI1NiA5NnMxOTIgODQuNiAxOTIgMTkyLTg0LjYgMTkyLTE5MiAxOTJ6Ii8+PHRleHQgeD0iMjU2IiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMDBweCIgZmlsbD0iIzI4YTc0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+JDwvdGV4dD48L3N2Zz4=');
+            --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIiBkPSJNNSA1aDJ2Mkg1ek0yMCA1aDJ2MmgtMnpNMzUgNWgydjJoLTJ6TTUwIDVoMnYyaC0yek01IDIwaDJ2Mkg1ek0yMCAyMGgydjJoLTJ6TTM1IDIwaDJ2MmgtMnpNNTAgMjBoMnYyaC0yek01IDM1aDJ2Mkg1ek0yMCAzNWgydjJoLTJ6TTM1IDM1aDJ2MmgtMnpNNTAgMzVoMnYyaC0yek01IDUwaDJ2Mkg1ek0yMCA1MGgydjJoLTJ6TTM1IDUwaDJ2MmgtMnpNNTAgNTBoMnYyaC0yeiIvPjwvc3ZnPg==');
+        }
+
+        .loading-animation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(227, 242, 253, 0.95);
+            background-image: var(--bg-pattern);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 123, 255, 0.1);
+        }
+        
+        .wallet {
+            width: 120px;
+            height: 120px;
+            background: var(--wallet-icon) no-repeat center;
+            background-size: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.7));
+            margin-left: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .bank {
+            width: 120px;
+            height: 120px;
+            background: var(--bank-icon) no-repeat center;
+            background-size: contain;
+            filter: drop-shadow(0 0 8px rgba(40, 167, 69, 0.7));
+            margin-right: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .token {
+            width: 80px;
+            height: 80px;
+            background: var(--xdc-icon) no-repeat center;
+            background-size: contain;
+            position: absolute;
+            left: 200px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            animation: moveToken 2.5s infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.9));
+            z-index: 3;
+        }
+        
+        .token.fiat {
+            background: var(--fiat-icon) no-repeat center;
+            background-size: contain;
+            filter: drop-shadow(0 0 10px rgba(40, 167, 69, 0.9));
+        }
+        
+        @keyframes moveToken {
+            0% {
+                left: 200px;
+                opacity: 0;
+                transform: scale(0.5) translateY(-50%);
+                background-image: var(--xdc-icon);
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1) translateY(-50%);
+                background-image: var(--xdc-icon);
+            }
+            50% {
+                left: calc(50% - 40px);
+                opacity: 1;
+                transform: scale(1) translateY(-50%);
+                background-image: var(--xdc-icon);
+            }
+            51% {
+                background-image: var(--fiat-icon);
+                filter: drop-shadow(0 0 10px rgba(40, 167, 69, 0.9));
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1) translateY(-50%);
+                background-image: var(--fiat-icon);
+            }
+            100% {
+                left: calc(100% - 300px);
+                opacity: 0;
+                transform: scale(0.5) translateY(-50%);
+                background-image: var(--fiat-icon);
+            }
+        }
+        
+        .loading-text {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            color: #1565C0; /* Darker blue text */
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <!--====== Start Preloader ======-->
+    <div class="preloader">
+        <div class="loader">
+            <img src="assets/images/preloader.png" alt="preloader">
+        </div>
+    </div>
+    <!--====== End Preloader ======-->
+
+    <!--======  Start Header Area  ======-->
+    <header id="header" class="header-layout1">
+        <div id="sticky-header" class="menu-area transparent-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="menu-wrap">
+                            <nav class="menu-nav">
+                                <div class="logo">
+                                    <a href="https://xdc.cash/"><img src="assets/images/logo/xdc-cash_logo.svg"
+                                            style="height: 45px;" alt="XDC.cash"></a>
+                                </div>
+                                <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                    <ul class="navigation">
+                                        <li class="active">
+                                            <a href="#header" class="section-link">Home</a>
+                                        </li>
+                                        <li><a href="#about" class="section-link">About</a></li>
+                                        <li><a href="#core-products" class="section-link">Core Products</a></li>
+                                        <li><a href="#for-businesses" class="section-link">For Businesses</a></li>
+                                        <li><a href="#why-xdc-cash" class="section-link">Why XDC.Cash</a></li>
+                                        <li><a href="#faqs" class="section-link">FAQs</a></li>
+                                        <li><a href="#contact" class="section-link">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu  -->
+        <div class="mobile-menu">
+            <nav class="menu-box">
+                <div class="close-btn"><i class="fas fa-times"></i></div>
+                <div class="nav-logo">
+                    <a href="https://xdc.cash/"><img src="assets/images/logo/xdc-cash_logo_light.svg"
+                            style="height: 45px;" alt="XDC.cash"></a>
+                </div>
+                <div class="menu-outer">
+                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                </div>
+            </nav>
+        </div>
+        <div class="menu-backdrop"></div>
+        <!-- End Mobile Menu -->
+    </header>
+    <!--======  Header Area  ======-->
+
+    <!--======  Smooth Wrapper  ======-->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <!--======  Main  ======-->
+            <main>
+                <!--======  Start Hero Section  ======-->
+                <section class="hero-banner">
+                    <!--===  Hero Wrapper  ===-->
+                    <div class="hero-section bg_cover" style="background-image: url(assets/images/hero/hero-bg1.jpg); min-height: 100vh;">
+                        <div class="container">
+                            <div class="row align-items-center" style="min-height: calc(100vh - 100px);">
+                                <div class="col-xl-6 col-lg-12">
+                                    <!--===  Hero Content  ===-->
+                                    <div class="hero-content">
+                                        <h1 class="fade-up" style="--delay: 0s">Future of Payment with XDC Network</h1>
+                                        <h5 class="fade-up" style="--delay: 0.2s">Revolutionizing Payments for Fintech
+                                            Companies, Cross-Border Payment Institutions, and Next-Generation Crypto
+                                            Payment Solutions.</h5>
+                                        <div class="hero-button fade-up" style="--delay: 0.4s">
+                                            <div style="margin-top: 15px;">
+                                            <div id="content">
+                                                <p>Loading XDC.Cash button...</p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12">
+                                    <!--===  Hero Image Box  ===-->
+                                    <div class="hero-image-box">
+                                        <div id="default-images">
+                                            <div class="hero_image-one fade-up" style="--delay: 0s">
+                                                <img src="assets/images/hero/hero_img1.jpg" data-tilt alt="hero image">
+                                            </div>
+                                            <div class="hero_image-two fade-up" style="--delay: 0.2s">
+                                                <img src="assets/images/hero/hero_img2.png" alt="hero image">
+                                            </div>
+                                        </div>
+                                        <div id="map-container" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--======  End Hero Section  ======-->
+
+                <!-- Rest of your sections -->
+
+            </main>
+        </div>
+    </div>
+
+    <!-- jQuery first, then other dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Other dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- CDN links for missing dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Initialize after all dependencies are loaded -->
+    <script>
+        $(document).ready(function() {
+            // Show preloader
+            $(window).on('load', function() {
+                $('.preloader').fadeOut(500);
+            });
+
+            // Show fade-up elements
+            setTimeout(function() {
+                $('.fade-up').addClass('show');
+            }, 100);
+
+            // Initialize animations and effects
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Basic smooth scroll
+                gsap.to("html, body", {
+                    scrollBehavior: "smooth",
+                    duration: 1
+                });
+                
+                // Initialize other animations
+                $("[data-tilt]").tilt();
+                new WOW().init();
+            }
+            
+            // Mobile menu functionality
+            $('.mobile-nav-toggler').on('click', function() {
+                $('body').addClass('mobile-menu-visible');
+                $('.mobile-menu').addClass('show');
+            });
+            
+            $('.close-btn, .menu-backdrop').on('click', function() {
+                $('body').removeClass('mobile-menu-visible');
+                $('.mobile-menu').removeClass('show');
+            });
+
+            // Clone menu for mobile
+            $('.navbar-wrap ul').clone().appendTo('.menu-outer');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function fetchAccessToken() {
+                const contentDiv = document.getElementById('content');
+                if (!contentDiv) {
+                    console.error('Content div not found');
+                    return;
+                }
+
+                contentDiv.innerHTML = '<p>Loading XDC.Cash button...</p>';
+
+                fetch('/api/access-token')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        return fetch('/api/payout-link', {
+                            headers: {
+                                'Authorization': `Bearer ${data.access_token}`
+                            }
+                        });
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to get payout link');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data || !data.data || !data.data.link) {
+                            throw new Error('Invalid payout link response structure');
+                        }
+                        const buttonHtml = 
+                            `<a href="#" 
+                                onclick="showMapsIframe(event)"
+                                class="theme-btn style-one" style="background-color: #007bff;">
+                                Click here to access XDC.CASH
+                            </a>`;
+                        contentDiv.innerHTML = buttonHtml;
+                        window.paymentLink = data.data.link;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        contentDiv.innerHTML = "<p>Failed to load XDC.Cash button. Please try again later.</p>";
+                    });
+            }
+
+            fetchAccessToken();
+        });
+
+        function showMapsIframe(event) {
+            event.preventDefault();
+            const mapContainer = document.getElementById('map-container');
+            const defaultImages = document.getElementById('default-images');
+            
+            defaultImages.style.display = 'none';
+            mapContainer.style.display = 'block';
+            mapContainer.innerHTML = `
+                <div class="loading-animation">
+                    <div class="wallet"></div>
+                    <div class="token" style="animation-delay: 0s"></div>
+                    <div class="token" style="animation-delay: 0.8s"></div>
+                    <div class="token" style="animation-delay: 1.6s"></div>
+                    <div class="bank"></div>
+                </div>
+                <div class="loading-text">
+                    Converting XDC to Fiat...
+                </div>
+            `;
+
+            setTimeout(() => {
+                mapContainer.innerHTML = `
+                    <iframe id="maps-iframe" src="${window.paymentLink || 'about:blank'}" allowfullscreen></iframe>
+                `;
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
