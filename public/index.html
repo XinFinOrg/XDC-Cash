@@ -6,7 +6,10 @@
     <meta http-equiv="Permissions-Policy" content="publickey-credentials-create *; publickey-credentials-get *">
     <title>XDC.Cash | Future of Payment with XDC Network</title>
     <meta name="description" content="Revolutionizing Payments for Fintech Companies, Cross-Border Payment Institutions, and Next-Generation Crypto Payment Solutions.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!--====== Favicon Icon ======-->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
@@ -280,6 +283,37 @@
             --xdc-icon: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI1MCA1MEMxNDIuMSA1MCA1MCAxNDIuMSA1MCAyNTBzOTIuMSAyMDAgMjAwIDIwMCAyMDAtOTIuMSAyMDAtMjAwUzM1Ny45IDUwIDI1MCA1MHptMCAzNjBjLTg4LjIgMC0xNjAtNzEuOC0xNjAtMTYwUzE2MS44IDkwIDI1MCA5MHMxNjAgNzEuOCAxNjAgMTYwLTcxLjggMTYwLTE2MCAxNjB6IiBmaWxsPSIjMjg2MEU3Ii8+PHBhdGggZD0iTTI1MCAxNTBjLTU1LjIgMC0xMDAgNDQuOC0xMDAgMTAwczQ0LjggMTAwIDEwMCAxMDAgMTAwLTQ0LjggMTAwLTEwMC00NC44LTEwMC0xMDAtMTAweiIgZmlsbD0iIzI4NjBFNyIvPjx0ZXh0IHg9IjI1MCIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iODBweCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhEQzwvdGV4dD48L3N2Zz4=');
             --fiat-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyQzExNC42IDMyIDAgMTQ2LjYgMCAyODhzMTE0LjYgMjU2IDI1NiAyNTYgMjU2LTExNC42IDI1Ni0yNTZTMzk3LjQgMzIgMjU2IDMyem0wIDQ0OGMtMTA3LjQgMC0xOTItODQuNi0xOTItMTkyUzE0OC42IDk2IDI1NiA5NnMxOTIgODQuNiAxOTIgMTkyLTg0LjYgMTkyLTE5MiAxOTJ6Ii8+PHRleHQgeD0iMjU2IiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMDBweCIgZmlsbD0iIzI4YTc0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+JDwvdGV4dD48L3N2Zz4=');
             --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIiBkPSJNNSA1aDJ2Mkg1ek0yMCA1aDJ2MmgtMnpNMzUgNWgydjJoLTJ6TTUwIDVoMnYyaC0yek01IDIwaDJ2Mkg1ek0yMCAyMGgydjJoLTJ6TTM1IDIwaDJ2MmgtMnpNNTAgMjBoMnYyaC0yek01IDM1aDJ2Mkg1ek0yMCAzNWgydjJoLTJ6TTM1IDM1aDJ2MmgtMnpNNTAgMzVoMnYyaC0yeiIvPjwvc3ZnPg==');
+        }
+
+        /* Add these styles */
+        #map-container {
+            -webkit-overflow-scrolling: touch;
+            overflow: auto;
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            #maps-iframe {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 9999;
+                background: #fff;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            body.iframe-active {
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+            }
         }
 
     </style>
@@ -1382,6 +1416,10 @@
             
             defaultImages.style.display = 'none';
             mapContainer.style.display = 'block';
+            
+            // Add class to body when iframe is active
+            document.body.classList.add('iframe-active');
+            
             mapContainer.innerHTML = `
                 <div class="loading-animation">
                     <div class="wallet"></div>
@@ -1403,13 +1441,37 @@
                     <iframe 
                         id="maps-iframe" 
                         src="${window.paymentLink || 'about:blank'}" 
-                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment"
-                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
+                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment; geolocation; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-presentation allow-downloads allow-modals allow-orientation-lock"
                         allowfullscreen
-                        style="border: none; width: 100%; height: 100%;"
+                        webkitallowfullscreen="true"
+                        mozallowfullscreen="true"
+                        oallowfullscreen="true"
+                        msallowfullscreen="true"
+                        style="border: none; width: 100%; height: 100%; overflow: auto; -webkit-overflow-scrolling: touch;"
                     ></iframe>
                 `;
+
+                // Add event listener for iframe load
+                const iframe = document.getElementById('maps-iframe');
+                iframe.addEventListener('load', function() {
+                    // Ensure proper mobile viewport
+                    if (iframe.contentWindow) {
+                        try {
+                            iframe.contentWindow.document.body.style.overflow = 'auto';
+                            iframe.contentWindow.document.body.style.webkitOverflowScrolling = 'touch';
+                        } catch (e) {
+                            // Handle cross-origin restrictions
+                            console.log('Cross-origin iframe loaded');
+                        }
+                    }
+                });
             }, 5000);
+        }
+
+        // Add cleanup when iframe is closed
+        function cleanupIframe() {
+            document.body.classList.remove('iframe-active');
         }
     </script>
     
