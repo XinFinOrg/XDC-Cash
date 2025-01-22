@@ -27,7 +27,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Encryptus API configuration
-const ENCRYPTUS_API_URL = process.env.ENCRYPTUS_API_URL || 'https://preprod.encryptus.co/v1/partners/generate/token';
+const ENCRYPTUS_API_URL = process.env.ENCRYPTUS_API_URL;
 const PARTNER_EMAIL = process.env.PARTNER_EMAIL;
 const PARTNER_PASSWORD = process.env.PARTNER_PASSWORD;
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -39,7 +39,7 @@ app.get('/api/access-token', async (req, res) => {
         console.log("I am here");
         logger.info('Requesting Encryptus access token');
         console.log(ENCRYPTUS_API_URL,PARTNER_EMAIL,PARTNER_PASSWORD,CLIENT_ID,CLIENT_SECRET);
-        const response = await axios.post(`${ENCRYPTUS_API_URL}`, {
+        const response = await axios.post(`${ENCRYPTUS_API_URL}/generate/token`, {
             partnerEmail: PARTNER_EMAIL,
             partnerPassword: PARTNER_PASSWORD,
             grant_services: [
@@ -74,8 +74,7 @@ app.get('/api/payout-link', async (req, res) => {
         const accessToken = authHeader.split(' ')[1];
         console.log("33333",accessToken);
 
-        const response = await axios.get(
-            'https://preprod.encryptus.co/v1/partners/generate/payoutlink',
+        const response = await axios.get(`${ENCRYPTUS_API_URL}/generate/payoutlink`,
             {
                 headers: {
                     'accept': '*/*',
