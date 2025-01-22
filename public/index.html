@@ -71,7 +71,7 @@
 
             .hero_image-one,
             .hero_image-two {
-                position: relative;
+            position: relative;
                 max-width: 100%;
                 height: auto;
             }
@@ -86,7 +86,7 @@
             .hero_image-two img {
                 max-width: 100%;
                 height: auto;
-                display: block;
+            display: block;
             }
         }
 
@@ -133,13 +133,13 @@
             filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.7));
             margin-right: 100px;
         }
-
+        
         .bank {
             background-image: var(--bank-icon);
             filter: drop-shadow(0 0 8px rgba(40, 167, 69, 0.7));
             margin-left: 100px;
         }
-
+        
         .token {
             width: 70px;
             height: 70px;
@@ -153,7 +153,7 @@
             opacity: 0;
             z-index: 3;
         }
-
+        
         @keyframes moveToken {
             0% {
                 left: 25%;
@@ -190,7 +190,7 @@
                 background-image: var(--fiat-icon);
             }
         }
-
+        
         .loading-text {
             position: absolute;
             bottom: 20px;
@@ -562,14 +562,11 @@
                                 <!--===  Iconic Box  ===-->
                                 <div class="iconic-box style-five">
                                     <div class="icon">
-                                        <i class=" "><img src="assets/images/icons/bridge_icon.svg" alt=""></i>
+                                        <i class=" "><img src="assets/images/icons/bridge_icon.svg" alt="Bridge Icon"></i>
                                     </div>
                                     <div class="content">
-                                        <h4 class="title">R3 Corda Bridge to XDC Network Settlement</h4>
-                                        <p>Facilitate seamless settlement of R3 Corda transactions on the XDC Network.
-                                            Our bridge offers unparalleled interoperability, connecting enterprise
-                                            blockchain applications with the fast, cost-efficient XDC Network to deliver
-                                            transformative payment and settlement solutions.</p>
+                                        <h4 class="title">Cross-Chain Bridge</h4>
+                                        <p>Enable seamless asset transfers between XDC Network and other major blockchains. Our bridge ensures secure, fast, and cost-effective cross-chain transactions with built-in compliance features.</p>
                                     </div>
                                 </div>
                             </div>
@@ -577,14 +574,11 @@
                                 <!--===  Iconic Box  ===-->
                                 <div class="iconic-box style-five">
                                     <div class="icon">
-                                        <i class=" "><img src="assets/images/icons/onoff-ramp_icon.svg" alt=""></i>
+                                        <i class=" "><img src="assets/images/icons/ramp_icon.svg" alt="Ramp Icon"></i>
                                     </div>
                                     <div class="content">
-                                        <h4 class="title">XDC On/Off-Ramp Solutions</h4>
-                                        <p>Convert XDC tokens to fiat or integrate XDC payments into your offerings
-                                            effortlessly. With global reach, secure compliance, and lightning-fast
-                                            transactions, our on/off-ramp solutions empower businesses to access and
-                                            offer cutting-edge payment options.</p>
+                                        <h4 class="title">Fiat On/Off Ramp</h4>
+                                        <p>Provide your users with seamless fiat-to-crypto and crypto-to-fiat conversion capabilities. Support for multiple currencies and payment methods across 80+ countries.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1120,7 +1114,7 @@
                                     <div class="footer-content fade-up" style="--delay: 0s">
                                         <div class="footer-logo">
                                             <img src="assets/images/logo/xdc-cash_logo.svg" alt="XDC.Cash Logo">
-                                        </div>
+        </div>
                                         <p>Powered by <a href="https://xinfin.org/" target="_blank">XDC Network</a> –
                                             Pioneering the Future of Payment Infrastructure with Blockchain Technology.
                                         </p>
@@ -1149,7 +1143,7 @@
     </div>
 
     <!-- jQuery first, then other dependencies -->
-
+    
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Other dependencies -->
 
@@ -1168,7 +1162,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     
-
+    
     <!-- Initialize after all dependencies are loaded -->
 
     <script>
@@ -1202,7 +1196,7 @@
                 gsap.registerPlugin(ScrollTrigger);
 
                 
-
+                
                 // Basic smooth scroll
 
                 gsap.to("html, body", {
@@ -1214,7 +1208,7 @@
                 });
 
                 
-
+                
                 // Initialize other animations
 
                 $("[data-tilt]").tilt();
@@ -1224,7 +1218,7 @@
             }
 
             
-
+            
             // Mobile menu functionality
 
             $('.mobile-nav-toggler').on('click', function() {
@@ -1236,7 +1230,7 @@
             });
 
             
-
+            
             $('.close-btn, .menu-backdrop').on('click', function() {
 
                 $('body').removeClass('mobile-menu-visible');
