@@ -33,20 +33,6 @@ const PARTNER_PASSWORD = process.env.PARTNER_PASSWORD;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-// Add these headers to your Express app
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://preprod.encryptus.co');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-});
-
 // Get access token
 app.get('/api/access-token', async (req, res) => {
     try {
