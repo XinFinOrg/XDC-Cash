@@ -1404,15 +1404,17 @@
                         id="maps-iframe" 
                         src="${window.paymentLink || 'about:blank'}" 
                         allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment"
-                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation"
                         allowfullscreen
                         style="border: none; width: 100%; height: 100%;"
+                        crossorigin="use-credentials"
+                        referrerpolicy="origin"
                     ></iframe>
                 `;
             }, 5000);
         }
     </script>
-
+    
     <script>
     // Add after your existing scripts
     document.addEventListener('DOMContentLoaded', function() {
