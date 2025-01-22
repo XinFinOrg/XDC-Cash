@@ -102,226 +102,153 @@
             to { opacity: 1; }
         }
 
-        /* Loading Animation Styles */
-
-        :root {
-
-            --wallet-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMDA3YmZmIiBkPSJNNDY0IDEyOEg0OGMtMjYuNTEgMC00OCAyMS40OS00OCA0OHYyNTZjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFYxNzZjMC0yNi41MS0yMS40OS00OC00OC00OHptMTYgMzA0YzAgOC44MjItNy4xNzggMTYtMTYgMTZINDhjLTguODIyIDAtMTYtNy4xNzgtMTYtMTZWMTc2YzAtOC44MjIgNy4xNzgtMTYgMTYtMTZoNDE2YzguODIyIDAgMTYgNy4xNzggMTYgMTZ2MjU2eiIvPjxwYXRoIGZpbGw9IiMwMDdiZmYiIGQ9Ik00NjQgMjI0SDQ4Yy04LjgyMiAwLTE2IDcuMTc4LTE2IDE2djEyOGMwIDguODIyIDcuMTc4IDE2IDE2IDE2aDQxNmM4LjgyMiAwIDE2LTcuMTc4IDE2LTE2VjI0MGMwLTguODIyLTcuMTc4LTE2LTE2LTE2em0tMTYgMTI4SDY0VjI1Nmg4NHY2NGgzMnYtNjRoODR2NjRoMzJ2LTY0aDg0djk2eiIvPjwvc3ZnPg==');
-
-            --bank-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyTDMyIDEyOHY2NGg0NDh2LTY0TDI1NiAzMnptMCAzMmw2NCAyNEgxOTJsNjQtMjR6TTY0IDMyMGg2NFYxOTJoNjR2MTI4aDY0VjE5Mmg2NHYxMjhoNjRWMTkyaDY0djEyOGg0OHYzMkg0OHYtMzJoMTZ6TTQ4IDM4NGg0MTZ2OTZINDh2LTk2eiIvPjwvc3ZnPg==');
-
-            --xdc-icon: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI1MCA1MEMxNDIuMSA1MCA1MCAxNDIuMSA1MCAyNTBzOTIuMSAyMDAgMjAwIDIwMCAyMDAtOTIuMSAyMDAtMjAwUzM1Ny45IDUwIDI1MCA1MHptMCAzNjBjLTg4LjIgMC0xNjAtNzEuOC0xNjAtMTYwUzE2MS44IDkwIDI1MCA5MHMxNjAgNzEuOCAxNjAgMTYwLTcxLjggMTYwLTE2MCAxNjB6IiBmaWxsPSIjMjg2MEU3Ii8+PHBhdGggZD0iTTI1MCAxNTBjLTU1LjIgMC0xMDAgNDQuOC0xMDAgMTAwczQ0LjggMTAwIDEwMCAxMDAgMTAwLTQ0LjggMTAwLTEwMC00NC44LTEwMC0xMDAtMTAweiIgZmlsbD0iIzI4NjBFNyIvPjx0ZXh0IHg9IjI1MCIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iODBweCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhEQzwvdGV4dD48L3N2Zz4=');
-
-            --fiat-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyQzExNC42IDMyIDAgMTQ2LjYgMCAyODhzMTE0LjYgMjU2IDI1NiAyNTYgMjU2LTExNC42IDI1Ni0yNTZTMzk3LjQgMzIgMjU2IDMyem0wIDQ0OGMtMTA3LjQgMC0xOTItODQuNi0xOTItMTkyUzE0OC42IDk2IDI1NiA5NnMxOTIgODQuNiAxOTIgMTkyLTg0LjYgMTkyLTE5MiAxOTJ6Ii8+PHRleHQgeD0iMjU2IiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMDBweCIgZmlsbD0iIzI4YTc0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+JDwvdGV4dD48L3N2Zz4=');
-
-            --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIiBkPSJNNSA1aDJ2Mkg1ek0yMCA1aDJ2MmgtMnpNMzUgNWgydjJoLTJ6TTUwIDVoMnYyaC0yek01IDIwaDJ2Mkg1ek0yMCAyMGgydjJoLTJ6TTM1IDIwaDJ2MmgtMnpNNTAgMjBoMnYyaC0yek01IDM1aDJ2Mkg1ek0yMCAzNWgydjJoLTJ6TTM1IDM1aDJ2MmgtMnpNNTAgMzVoMnYyaC0yek01IDUwaDJ2Mkg1ek0yMCA1MGgydjJoLTJ6TTM1IDUwaDJ2MmgtMnpNNTAgNTBoMnYyaC0yeiIvPjwvc3ZnPg==');
-
-        }
-
-
-
+        /* Loading Animation Styles - Mobile Optimized */
         .loading-animation {
-
             position: relative;
-
             width: 100%;
-
             height: 100%;
-
             display: flex;
-
             align-items: center;
-
-            justify-content: space-between;
-
+            justify-content: center;
             background: rgba(227, 242, 253, 0.95);
-
             background-image: var(--bg-pattern);
-
             padding: 20px;
-
             border-radius: 10px;
-
             box-shadow: 0 8px 32px rgba(0, 123, 255, 0.1);
-
+            overflow: hidden;
         }
 
-        
+        .wallet, .bank {
+            width: 80px;
+            height: 80px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            z-index: 2;
+        }
 
         .wallet {
-
-            width: 120px;
-
-            height: 120px;
-
-            background: var(--wallet-icon) no-repeat center;
-
-            background-size: contain;
-
+            background-image: var(--wallet-icon);
             filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.7));
-
-            margin-left: 50px;
-
-            position: relative;
-
-            z-index: 2;
-
+            margin-right: 100px;
         }
-
-        
 
         .bank {
-
-            width: 120px;
-
-            height: 120px;
-
-            background: var(--bank-icon) no-repeat center;
-
-            background-size: contain;
-
+            background-image: var(--bank-icon);
             filter: drop-shadow(0 0 8px rgba(40, 167, 69, 0.7));
-
-            margin-right: 50px;
-
-            position: relative;
-
-            z-index: 2;
-
+            margin-left: 100px;
         }
-
-        
 
         .token {
-
-            width: 80px;
-
-            height: 80px;
-
-            background: var(--xdc-icon) no-repeat center;
-
+            width: 60px;
+            height: 60px;
             background-size: contain;
-
+            background-repeat: no-repeat;
+            background-position: center;
             position: absolute;
-
-            left: 200px;
-
             top: 50%;
-
-            transform: translateY(-50%);
-
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
             opacity: 0;
-
-            animation: moveToken 2.5s infinite;
-
-            filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.9));
-
             z-index: 3;
-
         }
-
-        
-
-        .token.fiat {
-
-            background: var(--fiat-icon) no-repeat center;
-
-            background-size: contain;
-
-            filter: drop-shadow(0 0 10px rgba(40, 167, 69, 0.9));
-
-        }
-
-        
 
         @keyframes moveToken {
-
             0% {
-
-                left: 200px;
-
+                left: 25%;
                 opacity: 0;
-
-                transform: scale(0.5) translateY(-50%);
-
+                transform: translate(-50%, -50%) scale(0.5);
                 background-image: var(--xdc-icon);
-
             }
-
             20% {
-
                 opacity: 1;
-
-                transform: scale(1) translateY(-50%);
-
-                background-image: var(--xdc-icon);
-
+                transform: translate(-50%, -50%) scale(1);
             }
-
+            40% {
+                left: 50%;
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+                background-image: var(--xdc-icon);
+            }
             50% {
-
-                left: calc(50% - 40px);
-
-                opacity: 1;
-
-                transform: scale(1) translateY(-50%);
-
-                background-image: var(--xdc-icon);
-
-            }
-
-            51% {
-
                 background-image: var(--fiat-icon);
-
-                filter: drop-shadow(0 0 10px rgba(40, 167, 69, 0.9));
-
             }
-
+            60% {
+                left: 50%;
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
             80% {
-
                 opacity: 1;
-
-                transform: scale(1) translateY(-50%);
-
-                background-image: var(--fiat-icon);
-
+                transform: translate(-50%, -50%) scale(1);
             }
-
             100% {
-
-                left: calc(100% - 300px);
-
+                left: 75%;
                 opacity: 0;
-
-                transform: scale(0.5) translateY(-50%);
-
+                transform: translate(-50%, -50%) scale(0.5);
                 background-image: var(--fiat-icon);
-
             }
-
         }
 
-        
-
         .loading-text {
-
             position: absolute;
-
-            bottom: 50px;
-
+            bottom: 20px;
             width: 100%;
-
             text-align: center;
-
-            color: #1565C0; /* Darker blue text */
-
-            font-size: 24px;
-
+            color: #1565C0;
+            font-size: 18px;
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-
             font-weight: 500;
+            padding: 0 20px;
+        }
 
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .loading-animation {
+                padding: 10px;
+                min-height: 200px;
+            }
+
+            .wallet, .bank {
+                width: 50px;
+                height: 50px;
+            }
+
+            .wallet {
+                margin-right: 60px;
+            }
+
+            .bank {
+                margin-left: 60px;
+            }
+
+            .token {
+                width: 40px;
+                height: 40px;
+            }
+
+            .loading-text {
+                font-size: 16px;
+                bottom: 10px;
+            }
+        }
+
+        /* Fix animation on mobile */
+        .token {
+            animation: moveToken 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Ensure proper container sizing on mobile */
+        #map-container {
+            min-height: 300px;
+            height: calc(100vh - 80px);
+        }
+
+        @media (max-width: 768px) {
+            #map-container {
+                height: calc(100vh - 60px);
+            }
         }
 
         .hero-image-box {
@@ -343,6 +270,15 @@
         .hero_image-two img {
             position: relative;
             z-index: 1;
+        }
+
+        /* Add this before the Loading Animation Styles */
+        :root {
+            --wallet-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMDA3YmZmIiBkPSJNNDY0IDEyOEg0OGMtMjYuNTEgMC00OCAyMS40OS00OCA0OHYyNTZjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFYxNzZjMC0yNi41MS0yMS40OS00OC00OC00OHptMTYgMzA0YzAgOC44MjItNy4xNzggMTYtMTYgMTZINDhjLTguODIyIDAtMTYtNy4xNzgtMTYtMTZWMTc2YzAtOC44MjIgNy4xNzgtMTYgMTYtMTZoNDE2YzguODIyIDAgMTYgNy4xNzggMTYgMTZ2MjU2eiIvPjxwYXRoIGZpbGw9IiMwMDdiZmYiIGQ9Ik00NjQgMjI0SDQ4Yy04LjgyMiAwLTE2IDcuMTc4LTE2IDE2djEyOGMwIDguODIyIDcuMTc4IDE2IDE2IDE2aDQxNmM4LjgyMiAwIDE2LTcuMTc4IDE2LTE2VjI0MGMwLTguODIyLTcuMTc4LTE2LTE2LTE2em0tMTYgMTI4SDY0VjI1Nmg4NHY2NGgzMnYtNjRoODR2NjRoMzJ2LTY0aDg0djk2eiIvPjwvc3ZnPg==');
+            --bank-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyTDMyIDEyOHY2NGg0NDh2LTY0TDI1NiAzMnptMCAzMmw2NCAyNEgxOTJsNjQtMjR6TTY0IDMyMGg2NFYxOTJoNjR2MTI4aDY0VjE5Mmg2NHYxMjhoNjRWMTkyaDY0djEyOGg0OHYzMkg0OHYtMzJoMTZ6TTQ4IDM4NGg0MTZ2OTZINDh2LTk2eiIvPjwvc3ZnPg==');
+            --xdc-icon: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI1MCA1MEMxNDIuMSA1MCA1MCAxNDIuMSA1MCAyNTBzOTIuMSAyMDAgMjAwIDIwMCAyMDAtOTIuMSAyMDAtMjAwUzM1Ny45IDUwIDI1MCA1MHptMCAzNjBjLTg4LjIgMC0xNjAtNzEuOC0xNjAtMTYwUzE2MS44IDkwIDI1MCA5MHMxNjAgNzEuOCAxNjAgMTYwLTcxLjggMTYwLTE2MCAxNjB6IiBmaWxsPSIjMjg2MEU3Ii8+PHBhdGggZD0iTTI1MCAxNTBjLTU1LjIgMC0xMDAgNDQuOC0xMDAgMTAwczQ0LjggMTAwIDEwMCAxMDAgMTAwLTQ0LjggMTAwLTEwMC00NC44LTEwMC0xMDAtMTAweiIgZmlsbD0iIzI4NjBFNyIvPjx0ZXh0IHg9IjI1MCIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iODBweCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlhEQzwvdGV4dD48L3N2Zz4=');
+            --fiat-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDMyQzExNC42IDMyIDAgMTQ2LjYgMCAyODhzMTE0LjYgMjU2IDI1NiAyNTYgMjU2LTExNC42IDI1Ni0yNTZTMzk3LjQgMzIgMjU2IDMyem0wIDQ0OGMtMTA3LjQgMC0xOTItODQuNi0xOTItMTkyUzE0OC42IDk2IDI1NiA5NnMxOTIgODQuNiAxOTIgMTkyLTg0LjYgMTkyLTE5MiAxOTJ6Ii8+PHRleHQgeD0iMjU2IiB5PSIzMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMDBweCIgZmlsbD0iIzI4YTc0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+JDwvdGV4dD48L3N2Zz4=');
+            --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIiBkPSJNNSA1aDJ2Mkg1ek0yMCA1aDJ2MmgtMnpNMzUgNWgydjJoLTJ6TTUwIDVoMnYyaC0yek01IDIwaDJ2Mkg1ek0yMCAyMGgydjJoLTJ6TTM1IDIwaDJ2MmgtMnpNNTAgMjBoMnYyaC0yek01IDM1aDJ2Mkg1ek0yMCAzNWgydjJoLTJ6TTM1IDM1aDJ2MmgtMnpNNTAgMzVoMnYyaC0yeiIvPjwvc3ZnPg==');
         }
 
     </style>
@@ -1460,9 +1396,12 @@
                     <div class="bank"></div>
                 </div>
                 <div class="loading-text">
-                    Getting ready to cash out your XDC..!
+                    Converting XDC to Fiat...
                 </div>
             `;
+
+            // Force a reflow to ensure animation starts
+            void mapContainer.offsetWidth;
 
             setTimeout(() => {
                 mapContainer.innerHTML = `
