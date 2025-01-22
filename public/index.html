@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="Permissions-Policy" content="publickey-credentials-create *; publickey-credentials-get *">
     <title>XDC.Cash | Future of Payment with XDC Network</title>
     <meta name="description" content="Revolutionizing Payments for Fintech Companies, Cross-Border Payment Institutions, and Next-Generation Crypto Payment Solutions.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1399,7 +1400,14 @@
 
             setTimeout(() => {
                 mapContainer.innerHTML = `
-                    <iframe id="maps-iframe" src="${window.paymentLink || 'about:blank'}" allowfullscreen></iframe>
+                    <iframe 
+                        id="maps-iframe" 
+                        src="${window.paymentLink || 'about:blank'}" 
+                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment"
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
+                        allowfullscreen
+                        style="border: none; width: 100%; height: 100%;"
+                    ></iframe>
                 `;
             }, 5000);
         }
