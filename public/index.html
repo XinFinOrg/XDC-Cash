@@ -62,78 +62,45 @@
 
         }
 
-    </style>
-    <!--====== Style css ======-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!--====== Nav css ======-->
-    <link rel="stylesheet" href="assets/css/nav.css">
-    <style>
-
-        #map-container {
-
-            margin: 0;
-
-            padding: 0;
-
-            width: 100%;
-
-            height: calc(100vh - 100px);
-
-            position: relative;
-
-            overflow: hidden;
-
-        }
-
-        .hero-image-box {
-
-            margin: 0;
-
-            padding: 0;
-
-            width: 100%;
-
-            height: calc(100vh - 100px);
-
-            overflow: hidden;
-
-        }
-
-        #maps-iframe {
-
-            width: 100%;
-
-            height: 100%;
-
-            border: none;
-
-            border-radius: 10px;
-
-            margin: 0;
-
-            padding: 0;
-
-            display: block;
-
-            position: absolute;
-
-            top: 0;
-
-            left: 0;
-
-        }
-
         @media (max-width: 768px) {
-
-            #map-container, .hero-image-box {
-
-                height: calc(100vh - 80px);
-
+            .hero-image-box {
+                margin-top: 30px;
+                height: auto !important;
+                min-height: 300px;
             }
 
+            .hero_image-one,
+            .hero_image-two {
+                position: relative;
+                max-width: 100%;
+                height: auto;
+            }
+
+            .hero_image-two {
+                display: block;
+                margin: 0 auto;
+                max-width: 80%;
+            }
+
+            .hero_image-one img,
+            .hero_image-two img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
         }
 
+        /* Fix hero image loading */
+        .hero_image-two {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+            animation-delay: 0.2s;
+        }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
         /* Loading Animation Styles */
 
@@ -357,6 +324,99 @@
 
         }
 
+        .hero-image-box {
+            position: relative;
+        }
+
+        .hero-image-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f0f0f0;
+            z-index: -1;
+        }
+
+        .hero_image-one img,
+        .hero_image-two img {
+            position: relative;
+            z-index: 1;
+        }
+
+    </style>
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--====== Nav css ======-->
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <style>
+
+        #map-container {
+
+            margin: 0;
+
+            padding: 0;
+
+            width: 100%;
+
+            height: calc(100vh - 100px);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        .hero-image-box {
+
+            margin: 0;
+
+            padding: 0;
+
+            width: 100%;
+
+            height: calc(100vh - 100px);
+
+            overflow: hidden;
+
+        }
+
+        #maps-iframe {
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            border-radius: 10px;
+
+            margin: 0;
+
+            padding: 0;
+
+            display: block;
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+        }
+
+        @media (max-width: 768px) {
+
+            #map-container, .hero-image-box {
+
+                height: calc(100vh - 80px);
+
+            }
+
+        }
+
     </style>
 
 </head>
@@ -452,10 +512,13 @@
                                     <div class="hero-image-box">
                                         <div id="default-images">
                                             <div class="hero_image-one fade-up" style="--delay: 0s">
-                                                <img src="assets/images/hero/hero_img1.jpg" data-tilt alt="hero image">
+                                                <img src="assets/images/hero/hero_img1.jpg" data-tilt alt="hero image" 
+                                                     onerror="this.onerror=null; this.src='assets/images/hero/fallback.jpg';">
                                             </div>
                                             <div class="hero_image-two fade-up" style="--delay: 0.2s">
-                                                <img src="assets/images/hero/hero_img2.png" alt="hero image">
+                                                <img src="assets/images/hero/hero_img2.png" alt="hero image"
+                                                     onerror="this.onerror=null; this.src='assets/images/hero/fallback.png';"
+                                                     loading="lazy">
                                             </div>
                                         </div>
                                         <div id="map-container" style="display: none;"></div>
@@ -643,7 +706,7 @@
                                                     <p>Security and compliance are at the core of XDC.Cash. We partner
                                                         with globally licensed custodians and regulated payment
                                                         institutions to ensure every transaction meets the highest
-                                                        standards of trust and safety.</p>
+                                                      standards of trust and safety.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -694,7 +757,7 @@
                                 <div class="iconic-box style-ten">
                                     <div class="content">
                                         <h4 class="title text-white">Fast Transactions</h4>
-                                        <p class="text-color-light-grey">Leverage XDC Network’s 3-block finality to
+                                        <p class="text-color-light-grey">Leverage XDC Network's 3-block finality to
                                             process payments in under 9 seconds.</p>
                                     </div>
                                     <div class="thumbnail text-center mt-auto">
@@ -1001,7 +1064,7 @@
                                             <div id="collapse12" class="accordion-collapse collapse"
                                                 data-bs-parent="#accordionOne">
                                                 <div class="accordion-content">
-                                                    <p>Leveraging the XDC Network’s 3-block finality, transactions are
+                                                    <p>Leveraging the XDC Network's 3-block finality, transactions are
                                                         processed in just 6 to 9 seconds, making it one of the fastest
                                                         blockchain networks for payments.</p>
                                                 </div>
@@ -1045,7 +1108,7 @@
                                 <!--===  Section Title  ===-->
                                 <div class="section-title text-center text-xl-start text-lg-start text-md-start">
                                     <span class="sub-heading fade-up" style="--delay: 0s">Contact Us</span>
-                                    <h2 class="mb-20 fade-up" style="--delay: 0.2s">Let’s Build the Future of Payments
+                                    <h2 class="mb-20 fade-up" style="--delay: 0.2s">Let's Build the Future of Payments
                                         Together</h2>
                                     <p class="fade-up" style="--delay: 0.4s">Ready to get started or have questions
                                         about our solutions? Contact the XDC.Cash team today.</p>
@@ -1092,7 +1155,7 @@
                                             ever-evolving financial ecosystem.</p>
                                         <div class="cta-button mb-30 fade-up" style="--delay: 0.4s">
                                             <a href="https://forms.gle/fqseFDhVtRqnyQfy6" target="_blank"
-                                                class="theme-btn style-one">Let’s Innovate Together!</a>
+                                                class="theme-btn style-one">Let's Innovate Together!</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1407,6 +1470,25 @@
                 `;
             }, 5000);
         }
+    </script>
+
+    <script>
+    // Add after your existing scripts
+    document.addEventListener('DOMContentLoaded', function() {
+        // Preload hero images
+        const heroImages = [
+            'assets/images/hero/hero_img1.jpg',
+            'assets/images/hero/hero_img2.png'
+        ];
+
+        heroImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onerror = function() {
+                console.error('Failed to load image:', src);
+            };
+        });
+    });
     </script>
 </body>
 </html>
