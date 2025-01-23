@@ -26,21 +26,6 @@ const port = process.env.PORT || 3001;
 app.use(express.static('public'));
 app.use(express.json());
 
-// Add CORS headers
-app.use((req, res, next) => {
-    // Allow requests from Encryptus domains
-    res.header('Access-Control-Allow-Origin', 'https://preprod.encryptus.co');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
-
 // Encryptus API configuration
 const ENCRYPTUS_API_URL = process.env.ENCRYPTUS_API_URL;
 const PARTNER_EMAIL = process.env.PARTNER_EMAIL;
