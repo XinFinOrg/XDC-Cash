@@ -1403,10 +1403,11 @@
                     <iframe 
                         id="maps-iframe" 
                         src="${window.paymentLink || 'about:blank'}" 
-                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment"
-                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
+                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment; clipboard-read; clipboard-write"
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-downloads allow-presentation allow-modals"
                         allowfullscreen
                         style="border: none; width: 100%; height: 100%;"
+                        referrerpolicy="origin"
                     ></iframe>
                 `;
             }, 5000);
