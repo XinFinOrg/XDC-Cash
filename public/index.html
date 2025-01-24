@@ -1399,16 +1399,48 @@
             void mapContainer.offsetWidth;
 
             setTimeout(() => {
-                mapContainer.innerHTML = `
-                    <iframe 
-                        id="maps-iframe" 
-                        src="${window.paymentLink || 'about:blank'}" 
-                        allow="publickey-credentials-get *; publickey-credentials-create *; camera; microphone; payment"
-                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
-                        allowfullscreen
-                        style="border: none; width: 100%; height: 100%;"
-                    ></iframe>
-                `;
+                try {
+                    // Calculate center position for popup
+                    const width = 1200;
+                    const height = 800;
+                    const left = (window.screen.width - width) / 2;
+                    const top = (window.screen.height - height) / 2;
+
+                    // Open popup with specific size and position
+                    const popup = window.open(
+                        window.paymentLink || 'about:blank',
+                        'XDC.Cash Payment',
+                        `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+                    );
+
+                    if (popup) {
+                        // Reset the container if popup opened successfully
+                        setTimeout(() => {
+                            defaultImages.style.display = 'block';
+                            mapContainer.style.display = 'none';
+                            mapContainer.innerHTML = '';
+                        }, 500);
+
+                        // Focus the popup
+                        popup.focus();
+                    } else {
+                        // If popup blocked, show message
+                        mapContainer.innerHTML = `
+                            <div class="alert alert-warning" role="alert">
+                                Popup was blocked. Please allow popups for this site and try again.
+                                <br><br>
+                                <button onclick="window.open('${window.paymentLink}', '_blank', 'width=1200,height=800')" 
+                                    class="theme-btn style-one">
+                                    Click here to open payment window
+                                </button>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('Error opening popup:', error);
+                    // Fallback to new tab if popup fails
+                    window.open(window.paymentLink || 'about:blank', '_blank');
+                }
             }, 5000);
         }
     </script>
