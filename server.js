@@ -3,6 +3,7 @@ const path = require('path');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const winston = require('winston');
+const tokenHandler = require('./server/token-handler');
 
 dotenv.config();
 
@@ -21,10 +22,13 @@ const logger = winston.createLogger({
 });
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 app.use(express.static('public'));
 app.use(express.json());
+
+// Register token handler routes
+tokenHandler(app);
 
 // Encryptus API configuration
 const ENCRYPTUS_API_URL = process.env.ENCRYPTUS_API_URL;

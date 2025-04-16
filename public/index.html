@@ -1322,126 +1322,330 @@
         });
     </script>
 
+    <script src="token-storage.js"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function fetchAccessToken() {
-                const contentDiv = document.getElementById('content');
-                if (!contentDiv) {
-                    console.error('Content div not found');
-                    return;
+        // Token cache object with file-based storage
+        const tokenCache = {
+            token: null,
+            expirationTime: null,
+            link: null,
+            checkInterval: null,
+            
+            // Initialize from file
+            init: async function() {
+                try {
+                    console.log('Initializing token cache...');
+                    const data = await tokenStorage.readToken();
+                    console.log('Read token data:', data);
+                    
+                    if (data) {
+                        // Only restore if not expired
+                        if (data.expirationTime > Date.now()) {
+                            this.token = data.token;
+                            this.expirationTime = data.expirationTime;
+                            this.link = data.link;
+                            const remaining = this.getRemainingTime();
+                            console.log('Restored token from file, valid for', this.formatTime(remaining));
+                            console.log('Token expires at:', new Date(this.expirationTime).toLocaleString());
+                            this.startExpirationCheck();
+                        } else {
+                            console.log('Stored token expired, clearing cache');
+                            await this.clear();
+                        }
+                    } else {
+                        console.log('No token data found in file');
+                    }
+                } catch (error) {
+                    console.error('Error restoring token from file:', error);
+                    await this.clear();
                 }
-
-                contentDiv.innerHTML = '<p>Loading XDC.Cash button...</p>';
-
-                fetch('/api/access-token')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        return fetch('/api/payout-link', {
-                            headers: {
-                                'Authorization': `Bearer ${data.access_token}`
-                            }
-                        });
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Failed to get payout link');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (!data || !data.data || !data.data.link) {
-                            throw new Error('Invalid payout link response structure');
-                        }
-                        const buttonHtml = 
-                            `<a href="#" 
-                                onclick="showMapsIframe(event)"
-                                class="theme-btn style-one" style="background-color: #007bff;">
-                                Click here to access XDC.CASH
-                            </a>`;
-                        contentDiv.innerHTML = buttonHtml;
-                        window.paymentLink = data.data.link;
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        contentDiv.innerHTML = "<p>Failed to load XDC.Cash button. Please try again later.</p>";
+            },
+            
+            // Format time in hours and minutes
+            formatTime: function(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const remainingSeconds = seconds % 60;
+                return `${hours}h ${minutes}m ${remainingSeconds}s`;
+            },
+            
+            // Start periodic expiration check
+            startExpirationCheck: function() {
+                // Clear any existing interval
+                if (this.checkInterval) {
+                    clearInterval(this.checkInterval);
+                }
+                
+                // Check every second
+                this.checkInterval = setInterval(async () => {
+                    const isValid = this.isValid();
+                    const remaining = this.getRemainingTime();
+                    console.log('Token check - Valid:', isValid, 'Remaining time:', this.formatTime(remaining));
+                    
+                    if (!isValid) {
+                        console.log('Token expired, clearing cache');
+                        await this.clear();
+                        clearInterval(this.checkInterval);
+                    }
+                }, 1000);
+            },
+            
+            // Check if token is valid (less than 24 hours old)
+            isValid: function() {
+                if (!this.token || !this.expirationTime) return false;
+                const now = Date.now();
+                const isValid = now < this.expirationTime;
+                const remaining = this.getRemainingTime();
+                console.log('Token validation check:', {
+                    now: new Date(now).toLocaleString(),
+                    expiration: new Date(this.expirationTime).toLocaleString(),
+                    remaining: this.formatTime(remaining),
+                    isValid: isValid
+                });
+                return isValid;
+            },
+            
+            // Get remaining time in seconds
+            getRemainingTime: function() {
+                if (!this.expirationTime) return 0;
+                const now = Date.now();
+                return Math.max(0, Math.floor((this.expirationTime - now) / 1000));
+            },
+            
+            // Set new token with 1 hour expiration
+            setToken: async function(token, link) {
+                console.log('Setting new token...');
+                this.token = token;
+                this.link = link;
+                this.expirationTime = Date.now() + (60 * 60 * 1000); // 1 hour
+                
+                console.log('Token data to save:', {
+                    token: this.token,
+                    expirationTime: this.expirationTime,
+                    expiresAt: new Date(this.expirationTime).toLocaleString(),
+                    link: this.link
+                });
+                
+                // Save to file
+                try {
+                    const success = await tokenStorage.writeToken({
+                        token: this.token,
+                        expirationTime: this.expirationTime,
+                        link: this.link
                     });
+                    
+                    if (success) {
+                        const remaining = this.getRemainingTime();
+                        console.log('New token saved successfully, valid for', this.formatTime(remaining));
+                        console.log('Token expires at:', new Date(this.expirationTime).toLocaleString());
+                        this.startExpirationCheck();
+                    } else {
+                        console.error('Failed to save token to file');
+                    }
+                } catch (error) {
+                    console.error('Error saving token to file:', error);
+                }
+            },
+            
+            // Clear token
+            clear: async function() {
+                console.log('Clearing token cache...');
+                this.token = null;
+                this.expirationTime = null;
+                this.link = null;
+                if (this.checkInterval) {
+                    clearInterval(this.checkInterval);
+                    this.checkInterval = null;
+                }
+                try {
+                    const success = await tokenStorage.clearToken();
+                    if (success) {
+                        console.log('Token cache cleared successfully');
+                    } else {
+                        console.error('Failed to clear token cache');
+                    }
+                } catch (error) {
+                    console.error('Error clearing token file:', error);
+                }
             }
+        };
 
-            fetchAccessToken();
+        // Initialize token cache on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize token cache
+            await tokenCache.init();
+            
+            // Initialize the button with a static message
+            const contentDiv = document.getElementById('content');
+            if (contentDiv) {
+                contentDiv.innerHTML = 
+                    `<a href="#" 
+                        onclick="handlePaymentClick(event)"
+                        class="theme-btn style-one" style="background-color: #007bff;">
+                        Click here to access XDC.CASH
+                    </a>`;
+            }
         });
 
-        function showMapsIframe(event) {
+        async function handlePaymentClick(event) {
             event.preventDefault();
+            const contentDiv = document.getElementById('content');
             const mapContainer = document.getElementById('map-container');
             const defaultImages = document.getElementById('default-images');
             
-            defaultImages.style.display = 'none';
-            mapContainer.style.display = 'block';
-            mapContainer.innerHTML = `
-                <div class="loading-animation">
-                    <div class="wallet"></div>
-                    <div class="token" style="animation-delay: 0s"></div>
-                    <div class="token" style="animation-delay: 0.8s"></div>
-                    <div class="token" style="animation-delay: 1.6s"></div>
-                    <div class="bank"></div>
-                </div>
-                <div class="loading-text">
-                    Getting ready to cash out your XDC..!
-                </div>
-            `;
+            // Check if we have a valid token
+            if (tokenCache.isValid()) {
+                const remainingSeconds = tokenCache.getRemainingTime();
+                console.log(`Using existing token, valid for ${remainingSeconds} more seconds`);
+                
+                // Show loading animation
+                defaultImages.style.display = 'none';
+                mapContainer.style.display = 'block';
+                mapContainer.innerHTML = `
+                    <div class="loading-animation">
+                        <div class="wallet"></div>
+                        <div class="token" style="animation-delay: 0s"></div>
+                        <div class="token" style="animation-delay: 0.8s"></div>
+                        <div class="token" style="animation-delay: 1.6s"></div>
+                        <div class="bank"></div>
+                    </div>
+                    <div class="loading-text">
+                        Getting ready to cash out your XDC..!
+                    </div>
+                `;
 
-            // Force a reflow to ensure animation starts
-            void mapContainer.offsetWidth;
+                // Force a reflow to ensure animation starts
+                void mapContainer.offsetWidth;
 
-            setTimeout(() => {
-                try {
-                    // Calculate center position for popup
-                    const width = 1200;
-                    const height = 800;
-                    const left = (window.screen.width - width) / 2;
-                    const top = (window.screen.height - height) / 2;
+                setTimeout(() => {
+                    openPaymentWindow(tokenCache.link);
+                }, 2000);
+                
+                return;
+            }
 
-                    // Open popup with specific size and position
-                    const popup = window.open(
-                        window.paymentLink || 'about:blank',
-                        'XDC.Cash Payment',
-                        `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
-                    );
-
-                    if (popup) {
-                        // Reset the container if popup opened successfully
-                        setTimeout(() => {
-                            defaultImages.style.display = 'block';
-                            mapContainer.style.display = 'none';
-                            mapContainer.innerHTML = '';
-                        }, 500);
-
-                        // Focus the popup
-                        popup.focus();
-                    } else {
-                        // If popup blocked, show message
-                        mapContainer.innerHTML = `
-                            <div class="alert alert-warning" role="alert">
-                                Popup was blocked. Please allow popups for this site and try again.
-                                <br><br>
-                                <button onclick="window.open('${window.paymentLink}', '_blank', 'width=1200,height=800')" 
-                                    class="theme-btn style-one">
-                                    Click here to open payment window
-                                </button>
-                            </div>
-                        `;
-                    }
-                } catch (error) {
-                    console.error('Error opening popup:', error);
-                    // Fallback to new tab if popup fails
-                    window.open(window.paymentLink || 'about:blank', '_blank');
+            // Show loading state for new token generation
+            contentDiv.innerHTML = '<p>Generating new session...</p>';
+            
+            try {
+                // Fetch access token
+                const tokenResponse = await fetch('/api/access-token');
+                if (!tokenResponse.ok) {
+                    throw new Error('Failed to get access token');
                 }
-            }, 5000);
+                const tokenData = await tokenResponse.json();
+                
+                // Fetch payout link
+                const payoutResponse = await fetch('/api/payout-link', {
+                    headers: {
+                        'Authorization': `Bearer ${tokenData.access_token}`
+                    }
+                });
+                
+                if (!payoutResponse.ok) {
+                    throw new Error('Failed to get payout link');
+                }
+                
+                const payoutData = await payoutResponse.json();
+                if (!payoutData || !payoutData.data || !payoutData.data.link) {
+                    throw new Error('Invalid payout link response');
+                }
+
+                // Cache the new token and link
+                await tokenCache.setToken(tokenData.access_token, payoutData.data.link);
+                
+                // Show loading animation
+                defaultImages.style.display = 'none';
+                mapContainer.style.display = 'block';
+                mapContainer.innerHTML = `
+                    <div class="loading-animation">
+                        <div class="wallet"></div>
+                        <div class="token" style="animation-delay: 0s"></div>
+                        <div class="token" style="animation-delay: 0.8s"></div>
+                        <div class="token" style="animation-delay: 1.6s"></div>
+                        <div class="bank"></div>
+                    </div>
+                    <div class="loading-text">
+                        Getting ready to cash out your XDC..!
+                    </div>
+                `;
+
+                // Force a reflow to ensure animation starts
+                void mapContainer.offsetWidth;
+
+                setTimeout(() => {
+                    openPaymentWindow(tokenCache.link);
+                }, 2000);
+            } catch (error) {
+                console.error("Error:", error);
+                contentDiv.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Failed to load XDC.Cash. Please try again later.
+                        <br><br>
+                        <button onclick="handlePaymentClick(event)" class="theme-btn style-one">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function openPaymentWindow(link) {
+            try {
+                // Calculate center position for popup
+                const width = 1200;
+                const height = 800;
+                const left = (window.screen.width - width) / 2;
+                const top = (window.screen.height - height) / 2;
+
+                // Open popup with specific size and position
+                const popup = window.open(
+                    link,
+                    'XDC.Cash Payment',
+                    `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+                );
+
+                if (popup) {
+                    // Reset the container if popup opened successfully
+                    setTimeout(() => {
+                        const defaultImages = document.getElementById('default-images');
+                        const mapContainer = document.getElementById('map-container');
+                        const contentDiv = document.getElementById('content');
+                        
+                        defaultImages.style.display = 'block';
+                        mapContainer.style.display = 'none';
+                        mapContainer.innerHTML = '';
+                        // Reset button state
+                        contentDiv.innerHTML = 
+                            `<a href="#" 
+                                onclick="handlePaymentClick(event)"
+                                class="theme-btn style-one" style="background-color: #007bff;">
+                                Click here to access XDC.CASH
+                            </a>`;
+                    }, 500);
+
+                    // Focus the popup
+                    popup.focus();
+                } else {
+                    // If popup blocked, show message
+                    const mapContainer = document.getElementById('map-container');
+                    mapContainer.innerHTML = `
+                        <div class="alert alert-warning" role="alert">
+                            Popup was blocked. Please allow popups for this site and try again.
+                            <br><br>
+                            <button onclick="window.open('${link}', '_blank', 'width=1200,height=800')" 
+                                class="theme-btn style-one">
+                                Click here to open payment window
+                            </button>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error opening popup:', error);
+                // Fallback to new tab if popup fails
+                window.open(link, '_blank');
+            }
         }
     </script>
     
