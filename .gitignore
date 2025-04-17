@@ -12,4 +12,4 @@ node_modules/
 .specstory-cache
 /node_modules
 /frontend/node_modules
-/data
+/data/token-cache.json
