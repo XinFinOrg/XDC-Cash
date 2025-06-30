@@ -282,6 +282,20 @@
             --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBmaWxsPSJyZ2JhKDAsIDAsIDAsIDAuMDUpIiBkPSJNNSA1aDJ2Mkg1ek0yMCA1aDJ2MmgtMnpNMzUgNWgydjJoLTJ6TTUwIDVoMnYyaC0yek01IDIwaDJ2Mkg1ek0yMCAyMGgydjJoLTJ6TTM1IDIwaDJ2MmgtMnpNNTAgMjBoMnYyaC0yek01IDM1aDJ2Mkg1ek0yMCAzNWgydjJoLTJ6TTM1IDM1aDJ2MmgtMnpNNTAgMzVoMnYyaC0yeiIvPjwvc3ZnPg==');
         }
 
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        @media (max-width: 600px) {
+            .flip-card { width: 100% !important; height: auto !important; }
+            .flip-card-inner, .flip-card-front, .flip-card-back { height: 220px !important; }
+        }
+
+        .hero-small-btn:hover {
+            background: #007bff !important;
+            color: #fff !important;
+            border-color: #007bff !important;
+        }
+
     </style>
 
     <!--====== Style css ======-->
@@ -430,32 +444,47 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-6 col-lg-12">
                                     <!--===  Hero Content  ===-->
-                                    <div class="hero-content">
-                                        <h1 class="fade-up" style="--delay: 0s">Future of Payment with XDC Network</h1>
-                                        <h5 class="fade-up" style="--delay: 0.2s">Revolutionizing Payments for Fintech
-                                            Companies, Cross-Border Payment Institutions, and Next-Generation Crypto
-                                            Payment Solutions.</h5>
-                                        <div class="hero-button fade-up" style="--delay: 0.4s">
-                                            <div style="margin-top: 15px;">
-                                            <div id="content">
-                                                <p>Loading XDC.Cash button...</p>
+                                    <div style="text-align: center;">
+                                        <div class="hero-content">
+                                            <h1 class="fade-up" style="--delay: 0s; max-width: 700px; margin: 0 auto 18px auto;">Future of Payment with XDC Network</h1>
+                                            <h5 class="fade-up" style="--delay: 0.2s; max-width: 700px; margin: 0 auto 32px auto;">Revolutionizing Payments for Fintech Companies, Cross-Border Payment Institutions, and Next-Generation Crypto Payment Solutions.</h5>
+                                            <div class="hero-button fade-up" style="--delay: 0.4s; margin-bottom: 32px;">
+                                                <a href="#" onclick="handlePaymentClick(event)" class="theme-btn style-one hero-small-btn" style="background: #fff; color: #007bff; font-size: 1.1rem; font-weight: 600; padding: 10px 28px; border-radius: 8px; border: 2px solid #007bff; text-align: center; text-decoration: none; display: inline-block; margin: 0 auto; transition: background 0.2s, color 0.2s;">
+                                                    Click here to access XDC ramping
+                                                </a>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div class="hero-content">
+                                            <h5 class="fade-up" style="--delay: 0.2s; max-width: 700px; margin: 0 auto 32px auto;">One XDC Card for All Your Web3 Needs Empower your payments and manage your assets with industry-leading security and ease.</h5>
+                                            <div class="hero-button fade-up" style="--delay: 0.4s; margin-bottom: 32px;">
+                                                <a href="https://ledgerpe.io/" target="_blank" class="theme-btn style-one hero-small-btn" style="background: #fff; color: #007bff; font-size: 1.1rem; font-weight: 600; padding: 10px 28px; border-radius: 8px; border: 2px solid #007bff; text-align: center; text-decoration: none; display: inline-block; margin: 0 auto; transition: background 0.2s, color 0.2s;">
+                                                    Get your XDC Card now
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="col-xl-6 col-lg-12">
                                     <!--===  Hero Image Box  ===-->
-                                    <div class="hero-image-box">
+                                    <div class="hero-image-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                         <div id="default-images">
-                                            <div class="hero_image-one fade-up" style="--delay: 0s">
-                                                <img src="assets/images/hero/hero_img1.jpg" data-tilt alt="hero image" 
-                                                     onerror="this.onerror=null; this.src='assets/images/hero/fallback.jpg';">
+                                            <div class="hero_image-one fade-up" style="--delay: 0s; width: 100%; display: flex; justify-content: center;">
+                                                <img src="assets/images/hero/Encryptus.png" data-tilt alt="hero image"
+                                                     onerror="this.onerror=null; this.src='assets/images/hero/fallback.jpg';"
+                                                     style="max-width:320px;width:100%;height:auto;display:block;margin:0 auto 24px auto;" />
                                             </div>
-                                            <div class="hero_image-two fade-up" style="--delay: 0.2s">
-                                                <img src="assets/images/hero/hero_img2.png" alt="hero image"
-                                                     onerror="this.onerror=null; this.src='assets/images/hero/fallback.png';"
-                                                     loading="lazy">
+                                            <div class="hero_image-two fade-up" style="--delay: 0.2s; width: 100%; display: flex; justify-content: center;">
+                                                <div class="flip-card" style="width: 420px; height: 260px; perspective: 1000px;">
+                                                    <div class="flip-card-inner" style="position: relative; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(.4,2,.6,1); transform-style: preserve-3d;">
+                                                        <img class="flip-card-front" src="assets/images/hero/XDCcard.png" alt="XDC Card Front"
+                                                             style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);" />
+                                                        <img class="flip-card-back" src="assets/images/hero/XDCcard_back.png" alt="XDC Card Back"
+                                                             style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); transform: rotateY(180deg);" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div id="map-container" style="display: none;"></div>
@@ -1483,7 +1512,7 @@
                     `<a href="#" 
                         onclick="handlePaymentClick(event)"
                         class="theme-btn style-one" style="background-color: #007bff;">
-                        Click here to access XDC.CASH
+                        Click here to access XDC ramping
                     </a>`;
             }
         });
@@ -1621,7 +1650,7 @@
                             `<a href="#" 
                                 onclick="handlePaymentClick(event)"
                                 class="theme-btn style-one" style="background-color: #007bff;">
-                                Click here to access XDC.CASH
+                                Click here to access XDC ramping
                             </a>`;
                     }, 500);
 
@@ -1655,7 +1684,7 @@
         // Preload hero images
         const heroImages = [
             'assets/images/hero/hero_img1.jpg',
-            'assets/images/hero/hero_img2.png'
+            'assets/images/hero/XDCcard.png'
         ];
 
         heroImages.forEach(src => {
